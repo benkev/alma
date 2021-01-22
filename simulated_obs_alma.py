@@ -1,0 +1,46 @@
+#
+# Use to generate a simulated ALMA image of the data set  
+# RoundSpottyDisk1.fits. Uses 2-hour continuous integrations.
+# Noise assumes 10GHz BW, dual pol.
+#
+import os
+
+projectn= 'CFRAME00' 
+skymodeln='/home/benkev/SMILI/Lynn/RoundSpottyDisk1.fits'
+
+simobserve(project=projectn, skymodel=skymodeln, 
+#       incell         = '0.00005arcsec', incenter='46.1GHz', inwidth='1GHz',
+       incell         = '0.00016arcsec', incenter='46.1GHz', inwidth='1GHz',
+       setpointings   = False ,
+       ptgfile        = '/home/benkev/SMILI/Lynn/Betelgeusedirection.txt',
+       integration    = '300s',
+       obsmode        = 'int',
+#       antennalist    = '/home/benkev/SMILI/Lynn/ngvla-main-revC.cfg',
+       antennalist    = '/home/benkev/SMILI/Lynn/alma.cycle7.10.cfg',
+       hourangle      =  'transit',
+       totaltime      = '7200s',
+       outframe       = 'LSRK',
+       thermalnoise   = '',
+       verbose=False)
+
+modelname=projectn + '/' + projectn + '.ngvla-main-revC.ms'
+
+noisymodelname=projectn + '/' + projectn + '.ngvla-main-revC_mynoise.ms'
+
+os.system('cp -r ' + modelname + ' ' + noisymodelname) 
+
+sm.openfromms(noisymodelname)
+sm.setnoise(mode='simplenoise', simplenoise='0.0001755Jy')
+print('Adding noise...' )
+sm.corrupt()
+sm.done()
+
+fitsout=projectn + '/' + projectn + '.ngvla-main-revC_mynoise.uvfits'
+
+exportuvfits(vis=noisymodelname,fitsfile=fitsout,
+              datacolumn='data', field='',spw='',
+              antenna='',timerange='',writesyscal=False,
+              multisource=False, combinespw=True,
+              writestation=False,overwrite=False)
+
+
