@@ -1,0 +1,3 @@
+#Epoch     RA          DEC      TIME(optional)
+J2000 05h55m10.080 07d24m25.20s 
+
