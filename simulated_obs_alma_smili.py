@@ -1,12 +1,12 @@
 #
 # Use to generate a simulated ALMA image of the data set  
-# RoundSpottyDisk1.fits. Uses 2-hour continuous integrations.
+# RoundSpottyDisk_smili.fits. Uses 2-hour continuous integrations.
 # Noise assumes 10GHz BW, dual pol.
 #
 import os
 
-projectn= 'alma' 
-skymodeln='/home/benkev/ALMA/RoundSpottyDisk2.fits'
+projectn= 'alma_smili' 
+skymodeln='RoundSpottyDisk_smili.fits'
 
 simobserve(project=projectn, skymodel=skymodeln, 
        incell         = '0.00008arcsec', incenter='200GHz', inwidth='1GHz',
