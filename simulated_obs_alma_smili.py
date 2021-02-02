@@ -9,12 +9,10 @@ from alma_util import workdir
 #
 # Make this script running universally on our several machines.
 #  
-basedir = workdir + 'ALMA/'
+basedir = workdir() + 'ALMA/'
 
-projectn= 'alma_smili' 
+projectn = 'alma_smili' 
 skymodeln = basedir + 'RoundSpottyDisk_smili.fits'
-
-skymodeln='RoundSpottyDisk_smili.fits'
 
 simobserve(project=projectn, skymodel=skymodeln, 
        incell         = '0.00008arcsec', incenter='200GHz', inwidth='1GHz',

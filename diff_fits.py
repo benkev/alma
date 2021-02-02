@@ -8,7 +8,7 @@ from alma_util import workdir
 #
 # Make this script running universally on our several machines.
 #  
-basedir = workdir + 'ALMA/'
+basedir = workdir() + 'ALMA/'
 
 fits1 = basedir + 'RoundSpottyDisk.fits'
 fits2 = basedir + 'RoundSpottyDisk_smili.fits'
