@@ -22,10 +22,10 @@ def workdir():
     hostname = hostname.split('.')[0]
 
     if hostname == 'isco':
-        homedir = '/data-isco/data-smili/'
+        wdir = '/data-isco/data-smili/'
     elif hostname == 'leonid2' or hostname == 'capelin':
-        homedir = '/data-smili/'
+        wdir = '/data-smili/'
     else:
-        homedir = os.path.expanduser('~') + '/'
+        wdir = os.path.expanduser('~') + '/'
 
-    return datadir
+    return wdir
