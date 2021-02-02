@@ -1,29 +1,49 @@
+#
+# diff_ms.py
+#
+# Compare the visibility data from simulated observations of a Betelgeuse sky
+# image created in CASA with the same image after loading to SMILI2 and
+# saving. 
+#
+
 import matplotlib.pyplot as plt
 import numpy as np
+import os, platform
 
-msn1 = 'alma/alma.alma.cycle7.10.ms'
-msn2 = 'alma_smili/alma_smili.alma.cycle7.10.ms/'
+hostname = platform.node()   # Host name
+hostname = hostname.split('.')[0]
+
+#
+# Make this script running universally on our several machines.
+# The "home" directory (supposedly containing the ALMA and smili2_dev
+# directories) is different on different servers.
+# On leonid2 and capelin (Lynn) it is
+#     /data-smili/smili2_dev
+# On isco it is
+#     /data-smili
+# On my machine it is my home directory, ~ = /home/benkev
+#
+#
+if hostname == 'isco':
+    homedir = '/data-isco/data-smili/'
+elif hostname == 'leonid2' or hostname == 'capelin':
+    homedir = '/data-smili/'
+else:
+    homedir = os.path.expanduser('~') + '/'
+    
+basedir = homedir + 'ALMA/'
+
+
+msn1 = basedir + 'alma/alma.alma.cycle7.10.ms'              # Created in CASA
+msn2 = basedir + 'alma_smili/alma_smili.alma.cycle7.10.ms/' # Saved from SMILI2
 
 cols = ['antenna1', 'antenna2', 'u', 'v', 'w', 'data',
                          'flag', 'flag_row']
 
-
-#met = ms.metadata()
-
-# spw = 0  # Spectral window
-# field = 0
-# ipol = 0
-# times = md.timesforfield(field) # Get all the times for MS
-# times = np.array(times)
-# ymds = []     # List of string representations of times
-# for tim in times:
-#     qtim = qa.quantity(tim, 's') # {'unit':'s','value': 4953324816.75}
-#     ymd = qa.time(qtim, form='ymd', prec=8) # 8 means .../12:34:56.78
-#     ymds.append(ymd[0])
-
-
+#
+# Read in dat1 the visibilities of the image created with CASA
+#
 ms.open(msn1, nomodify=True)
-
 ms.selectinit(datadescid=0)      # Reset all previous selections
 
 rec = ms.getdata(cols)
@@ -31,8 +51,11 @@ dat1 = np.squeeze(rec['data'])
 
 ms.close()
 
+#
+# Read in dat2 the visibilities of the same image after loading/saving
+# in SMILI2
+#
 ms.open(msn2, nomodify=True)
-
 ms.selectinit(datadescid=0)      # Reset all previous selections
 
 rec = ms.getdata(cols)
@@ -40,11 +63,24 @@ dat2 = np.squeeze(rec['data'])
 
 ms.close()
 
-dif = abs(dat2 - dat1)
-dif = dif[0]
+#
+# Comparison
+#
 
-absd1 = np.abs(dat1)[0]
-absd2 = np.abs(dat2)[0]
+#
+# Absolute value of the difference are large
+#
+dif = np.abs(dat2 - dat1)      # dif = |dat2 - dat1|
+dif = dif[0]   # The polarizations (?) are the same, so leave only one
+
+#
+# Absolute values before and after SMILI2
+#
+absd1 = np.abs(dat1[0])
+absd2 = np.abs(dat2[0])
+abs_dif_abs = np.abs(absd2 - absd1)
+
+print('max(abs_dif_abs) = ', max(abs_dif_abs))
 
 if np.any(abs(absd1 - absd2) == 0.):
     print('Data in', msn, 'and', msn2, 'are identical.')

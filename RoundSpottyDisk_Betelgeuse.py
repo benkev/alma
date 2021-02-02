@@ -1,7 +1,33 @@
-# Make a circular spotted disk
-# In CASA
+#
+# Make a circular spotted disk at the Betelgeuse sky coordinates in CASA,
+# the size equivalent to 80 mas, the size of Betelgeuse found by
+# Lim et al. at 46 GHz.
+#
+import os, platform
 
-bname = 'RoundSpottyDisk2'
+hostname = platform.node()   # Host name
+hostname = hostname.split('.')[0]
+
+#
+# Make this script running universally on our several machines.
+# The "home" directory (supposedly containing the ALMA and smili2_dev
+# directories) is different on different servers.
+# On leonid2 and capelin (Lynn) it is
+#     /data-smili/smili2_dev
+# On isco it is
+#     /data-smili
+# On my machine it is my home directory, ~ = /home/benkev
+#
+#
+if hostname == 'isco':
+    homedir = '/data-isco/data-smili/'
+elif hostname == 'leonid2' or hostname == 'capelin':
+    homedir = '/data-smili/'
+else:
+    homedir = os.path.expanduser('~') + '/'
+
+
+bname = homedir + 'ALMA/RoundSpottyDisk'
 
 #
 # Betelgeuse
@@ -61,3 +87,4 @@ ia.modify(cl.torecord(),subtract=False)
 
 exportfits(imagename=bname + '.im', fitsimage=bname + '.fits',
            overwrite=True)
+
