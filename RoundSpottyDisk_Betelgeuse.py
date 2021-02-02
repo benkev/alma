@@ -4,30 +4,15 @@
 # Lim et al. at 46 GHz.
 #
 import os, platform
+from alma_util import workdir
 
-hostname = platform.node()   # Host name
-hostname = hostname.split('.')[0]
 
 #
 # Make this script running universally on our several machines.
-# The "home" directory (supposedly containing the ALMA and smili2_dev
-# directories) is different on different servers.
-# On leonid2 and capelin (Lynn) it is
-#     /data-smili/smili2_dev
-# On isco it is
-#     /data-smili
-# On my machine it is my home directory, ~ = /home/benkev
 #
-#
-if hostname == 'isco':
-    homedir = '/data-isco/data-smili/'
-elif hostname == 'leonid2' or hostname == 'capelin':
-    homedir = '/data-smili/'
-else:
-    homedir = os.path.expanduser('~') + '/'
+basedir = workdir() + 'ALMA/'
 
-
-bname = homedir + 'ALMA/RoundSpottyDisk'
+bname = basedir + 'RoundSpottyDisk'
 
 #
 # Betelgeuse
