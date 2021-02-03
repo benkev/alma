@@ -8,6 +8,8 @@ simulated_obs_alma.py         - simobserve it
 simulated_obs_alma_smili.py   - simobserve it after load/save in SMILI2
 diff_fits.py                  - differences between fits before and after SMILI2
 diff_ms.py                    - differences between visibilities
+alma_util.py                  - some convenience functions
+
 
     ============== !!!!!! EXTREMELY IMPORTANT !!!!! ================
 
