@@ -5,7 +5,6 @@
 # image created in CASA with the same image after loading to SMILI2 and
 # saving. 
 #
-
 import matplotlib.pyplot as plt
 import numpy as np
 from alma_util import workdir

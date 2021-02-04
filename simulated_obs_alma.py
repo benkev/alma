@@ -3,6 +3,7 @@
 # RoundSpottyDisk1.fits. Uses 2-hour continuous integrations.
 # Noise assumes 10GHz BW, dual pol.
 #
+import os
 from alma_util import workdir
 
 #

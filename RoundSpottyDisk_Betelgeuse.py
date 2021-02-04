@@ -3,7 +3,7 @@
 # the size equivalent to 80 mas, the size of Betelgeuse found by
 # Lim et al. at 46 GHz.
 #
-import os, platform
+import os
 from alma_util import workdir
 
 
