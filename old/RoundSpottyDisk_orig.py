@@ -16,7 +16,7 @@ cl.addcomponent(dir=direction, flux=28.0e-3, fluxunit='Jy', freq='46.1GHz', shap
 
 # Make some spots
 
-# brightn region: offset by -10mas in DEC, 20 mas in RA
+# bright region: offset by -10mas in DEC, 20 mas in RA
 #cl.addcomponent(dir=direction2, flux=0.01e-3, fluxunit='Jy', freq='46.1GHz', shape="Gaussian", 
 #                majoraxis="0.000013arcmin", minoraxis='0.000013arcmin', positionangle='0.0deg')
 
@@ -32,10 +32,11 @@ cl.addcomponent(dir=direction4, flux=-2.24e-4, fluxunit='Jy', freq='46.1GHz', sh
 cl.addcomponent(dir=direction5, flux=5.6e-5, fluxunit='Jy', freq='46.1GHz', shape="Gaussian", 
                 majoraxis="0.00006arcmin", minoraxis='0.00006arcmin', positionangle='0.0deg')
 #
-ia.fromshape("RoundSpottyDisk.im",[8196,8196,1,1],overwrite=True)
+#ia.fromshape("RoundSpottyDisk_orig.im",[8196,8196,1,1],overwrite=True)
+ia.fromshape("RoundSpottyDisk_orig.im",[4096,4096,1,1],overwrite=True)
 cs=ia.coordsys()
 cs.setunits(['rad','rad','','Hz'])
-cell_rad=qa.convert(qa.quantity("0.00004arcsec"),"rad")['value']
+cell_rad=qa.convert(qa.quantity("0.00008arcsec"),"rad")['value']
 cs.setincrement([-cell_rad,cell_rad],'direction')
 cs.setreferencevalue([qa.convert("02h",'rad')['value'],qa.convert("-02deg",'rad')['value']],type="direction")
 cs.setreferencevalue("46.1GHz",'spectral')
@@ -45,4 +46,4 @@ ia.setbrightnessunit("Jy/pixel")
 ia.modify(cl.torecord(),subtract=False)
 
 
-exportfits(imagename='RoundSpottyDisk.im',fitsimage='RoundSpottyDisk.fits',overwrite=True)
+exportfits(imagename='RoundSpottyDisk_orig.im',fitsimage='RoundSpottyDisk_orig.fits',overwrite=True)
