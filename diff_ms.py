@@ -15,8 +15,8 @@ from alma_util import workdir
 basedir = workdir() + 'ALMA/'
 
 
-msn1 = basedir + 'alma/alma.alma.cycle7.10.ms'              # Created in CASA
-msn2 = basedir + 'alma_smili/alma_smili.alma.cycle7.10.ms/' # Saved from SMILI2
+msn1 = basedir + 'alma2/alma.alma.cycle7.10.ms'              # Created in CASA
+msn2 = basedir + 'alma_smili2/alma_smili.alma.cycle7.10.ms/' # Saved from SMILI2
 
 cols = ['antenna1', 'antenna2', 'u', 'v', 'w', 'data',
                          'flag', 'flag_row']
@@ -27,9 +27,10 @@ cols = ['antenna1', 'antenna2', 'u', 'v', 'w', 'data',
 ms.open(msn1, nomodify=True)
 ms.selectinit(datadescid=0)      # Reset all previous selections
 
-rec = ms.getdata(cols)
-dat1 = np.squeeze(rec['data'])   # Through away zero-length dimensions
-
+rec1 = ms.getdata(cols)
+dat1 = np.squeeze(rec1['data'])   # Through away zero-length dimensions
+u1 = np.squeeze(rec1['u'])
+v1 = np.squeeze(rec1['v'])
 ms.close()
 
 #
@@ -39,8 +40,10 @@ ms.close()
 ms.open(msn2, nomodify=True)
 ms.selectinit(datadescid=0)      # Reset all previous selections
 
-rec = ms.getdata(cols)
-dat2 = np.squeeze(rec['data'])   # Through away zero-length dimensions
+rec2 = ms.getdata(cols)
+dat2 = np.squeeze(rec2['data'])   # Through away zero-length dimensions
+u2 = np.squeeze(rec2['u'])
+v2 = np.squeeze(rec2['v'])
 
 ms.close()
 
