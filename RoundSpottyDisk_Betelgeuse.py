@@ -69,6 +69,8 @@ ia.setcoordsys(cs.torecord())
 ia.setbrightnessunit("Jy/pixel")
 ia.modify(cl.torecord(),subtract=False)
 
+cl.done()
+ia.close()
 
 exportfits(imagename=bname + '.im', fitsimage=bname + '.fits',
            overwrite=True)

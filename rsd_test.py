@@ -56,6 +56,7 @@ cl.addcomponent(dir=dir3, flux=5.6e-5, fluxunit='Jy',
                 majoraxis="0.00006arcmin", minoraxis='0.00006arcmin',
                 positionangle='0.0deg')
 
+
 ia.fromshape(bname + ".im", [4096,4096,1,1], overwrite=True)
 
 cs=ia.coordsys()
@@ -70,6 +71,9 @@ cs.setincrement('1GHz','spectral')
 ia.setcoordsys(cs.torecord())
 ia.setbrightnessunit("Jy/pixel")
 ia.modify(cl.torecord(),subtract=False)
+
+cl.done()
+ia.close()
 
 
 exportfits(imagename=bname + '.im', fitsimage=bname + '.fits',
