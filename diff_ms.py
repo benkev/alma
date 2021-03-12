@@ -16,7 +16,7 @@ basedir = workdir() + 'ALMA/'
 
 
 msn1 = basedir + 'alma2/alma.alma.cycle7.10.ms'              # Created in CASA
-msn2 = basedir + 'alma_smili2/alma_smili.alma.cycle7.10.ms/' # Saved from SMILI2
+msn2 = basedir + 'smili2/smili.alma.cycle7.10.ms/' # Saved from SMILI2
 
 cols = ['antenna1', 'antenna2', 'u', 'v', 'w', 'data',
                          'flag', 'flag_row']

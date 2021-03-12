@@ -11,7 +11,7 @@ from alma_util import workdir
 #  
 basedir = workdir() + 'ALMA/'
 
-projectn = 'alma_smili' 
+projectn = 'smili' 
 skymodeln = basedir + 'RoundSpottyDisk_smili.fits'
 
 simobserve(project=projectn, skymodel=skymodeln, 
