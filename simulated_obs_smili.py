@@ -1,4 +1,5 @@
 #
+# simulated_obs_smili.py
 # Use to generate a simulated ALMA image of the data set  
 # RoundSpottyDisk_smili.fits. Uses 2-hour continuous integrations.
 # Noise assumes 10GHz BW, dual pol.
