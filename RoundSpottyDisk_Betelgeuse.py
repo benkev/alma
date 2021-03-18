@@ -12,7 +12,7 @@ from alma_util import workdir
 #
 basedir = workdir() + 'ALMA/'
 
-bname = basedir + 'RoundSpottyDisk'
+bname = basedir + 'RoundSpottyDisk_alma'
 
 #
 # Betelgeuse
