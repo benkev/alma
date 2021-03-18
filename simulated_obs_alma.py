@@ -18,7 +18,7 @@ projdir = 'alma_orig'
 projname = 'alma' 
 skymodeln = basedir + 'RoundSpottyDisk.fits'
 
-simobserve(project=projdir, skymodel=skymodeln, 
+simobserve(project=projname, skymodel=skymodeln, 
        incell         = '0.00008arcsec', incenter='200GHz', inwidth='1GHz',
        setpointings   = False ,
        ptgfile        = basedir + 'Betelgeusedirection.txt',
@@ -31,9 +31,9 @@ simobserve(project=projdir, skymodel=skymodeln,
        thermalnoise   = '',
        verbose=False)
 
-modelname=projdir + '/' + projname + '.alma.cycle7.10.ms'
+modelname=projname + '/' + projname + '.alma.cycle7.10.ms'
 
-noisymodelname=projdir + '/' + projname + '.alma.cycle7.10_mynoise.ms'
+noisymodelname=projname + '/' + projname + '.alma.cycle7.10_mynoise.ms'
 
 os.system('cp -r ' + modelname + ' ' + noisymodelname) 
 
@@ -43,7 +43,7 @@ print('Adding noise...' )
 sm.corrupt()
 sm.done()
 
-fitsout=projdir + '/' + projname + '.alma.cycle7.10_mynoise.uvfits'
+fitsout=projname + '/' + projname + '.alma.cycle7.10_mynoise.uvfits'
 
 exportuvfits(vis=noisymodelname,fitsfile=fitsout,
               datacolumn='data', field='',spw='',
@@ -51,4 +51,6 @@ exportuvfits(vis=noisymodelname,fitsfile=fitsout,
               multisource=False, combinespw=True,
               writestation=False,overwrite=False)
 
+os.system('mv ' + projname + '/ ' + projdir + '/')
+print('mv ' + projname + '/ ' + projdir + '/')
 
