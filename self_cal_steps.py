@@ -19,8 +19,8 @@ import sys
 
 niter = 5000
 
-#pdir = 'alma/'
-proj = 'smili'
+proj = 'alma'
+#proj = 'smili'
 #ns = ''
 ns = '_noise'
 

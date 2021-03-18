@@ -12,9 +12,9 @@ import casacore.tables.table as castb
 #import casacore.tables.tablecolumn as castc
 import sys
 
-scal1 = sys.argv[1]  # First calibration table directory name
-scal2 = sys.argv[2]  # Second calibration table directory name
-sms1 =  sys.argv[3]  # First MS table directory name
+scal1 = sys.argv[1]  # First calibration table directory name  (.cal)
+scal2 = sys.argv[2]  # Second calibration table directory name (.cal)
+sms1 =  sys.argv[3]  # First MS table directory name           (.ms)
 
 cal1 = castb(scal1)
 cal2 = castb(scal2)
