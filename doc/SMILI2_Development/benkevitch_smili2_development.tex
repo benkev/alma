@@ -15,14 +15,32 @@ This document describes the development and testing of the \verb@load_fits_casa(
 
 \begin{enumerate}
   \item \verb@@
+  \item \verb@alma_util.py@
   \item \verb@RoundSpottyDisk_Betelgeuse.py@
-  \item \verb@@
+  \item \verb@load_save_Betelgeuse.py@
   \item three
   \item four
 \end{enumerate}
 
 
-\section{Creating the FITS Model Image of Betelgeuse}
+\section{A Utility Module}
+
+A simple module \verb@alma_util.py@ provides the only function, \verb@workdir.py@, returning a string with the "work" directory path. It helps make scripts running universally on any of several machines used by the SMILI2 developers. The "work" directory (supposedly containing the ALMA and \verb@smili2_dev@ directories) is different on different servers. On leonid2 and capelin (owned by Lynn Matthews) it is \verb@/data-smili/@. On isco it is \verb@/data-isco/data-smili/@. On my machine it is my home directory, \verb@/home/benkev/@, etc. 
+
+In order to use it in CASA scripts, the user should copy \verb@alma_util.py@ to his or her CASA installation \verb@site-packages@ directory, which is like \\
+\verb@casa-release-5.7.2-4.el7/lib/python2.7/site-packages/@.
+
+
+\section{Creating a FITS Model Image of Betelgeuse}
+
+The script \verb@RoundSpottyDisk_Betelgeuse.py@ creates a circular spotted disk at the Betelgeuse sky coordinates at  \verb@RA=05h55m10.0800s@, \verb@DEC=07d24m25.200s@ (equinox \verb@J2000@), the size equivalent to 80 $\mu$as, which is the size of Betelgeuse found by Lim \emph{et al.} at 46 GHz. The script must be run in CASA: \\
+\verb@execfile('RoundSpottyDisk_Betelgeuse.py')@
+
+
+\section{Loading and Saving the FITS Image with SMILI2}
+
+
+
 \section{Testing the FITS Image Datacubes Identity}
 \section{Testing the CASA Measurement Sets' Visibility Data Identity}
 \section{Testing the Calibration Tables Identity}
@@ -31,7 +49,7 @@ This document describes the development and testing of the \verb@load_fits_casa(
 
 \section{Appendix}
 
-The software is located at the github repository \\
+The testing software is located at the github repository \\
 \verb@https://github.com/benkev/alma@ \\
 The user can create a local copy at a disk location using the command \\
 \verb%$ git clone git@github.com:benkev/alma.git alma% \\
