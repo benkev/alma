@@ -79,6 +79,16 @@ To keep the originals \verb@alma_orig@ and \verb@smili_orig@ safe, they were cop
 Comparison of the resulting measurement sets in the two directories, \verb@alma_orig@ and \verb@smili_orig@, was made with the script \verb@diff_ms.py@: \\
 \\
 \verb@execfile('diff_ms.py')@ \\
+\\
+It prints the maximum difference between the absolute values and phases of the complex visibilities and plots them versus time. 
+
+First runs showed identity in absolute values of the visibilities before and after SMILI2, but differences in their phases. Examination of the FITS header keyword set copied into the SMILI2 metadata showed that it lacked the following data: \\
+\verb@EQUINOX = 2000.0@ and \verb@RADESYS = 'FK5'@. \\
+\\
+Here the value of \verb@EQUINOX@ gives the \verb@epoch J2000@, the time 2000/1/1 12:00:00 in the Gregorian calendar of the reference point for celestial coordinates, the vernal equinox, which is continuously changing due to the earth precession. The keyword \verb@RADESYS@ provides the celestial coordinate reference frame, FK5.
+However, CASA by default used the modern celestial coordinate system, ICRS, which did not refer to the vernal equinox, and its reference axes were fixed in space.  
+
+The corresponding items were introduced in the SMILI2 metadata set as \verb@equinox@ ans \verb@coordsys@. Saving the FITS files with correct \verb@EQUINOX@ and \verb@RADESYS@ values fixed the discrepancies between the observation visibility data.
 
 
 
