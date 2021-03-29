@@ -10,7 +10,7 @@ from alma_util import workdir
 #  
 basedir = workdir() + 'ALMA/'
 
-fits1 = basedir + 'RoundSpottyDisk.fits'
+fits1 = basedir + 'RoundSpottyDisk_alma.fits'
 fits2 = basedir + 'RoundSpottyDisk_smili.fits'
 
 hdu1 = pf.open(fits1)[0]
