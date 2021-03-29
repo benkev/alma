@@ -5,6 +5,10 @@
 # RoundSpottyDisk_<projname>.fits. Uses 2-hour continuous integrations.
 # Noise assumes 10GHz BW, dual pol.
 #
+# Before running, set the str variables projname and projdir. The former
+# will be a part of the output filenames, while the latter will be the
+# directory to save the output files.
+#
 import os
 from alma_util import workdir
 

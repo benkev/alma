@@ -18,7 +18,9 @@ This document describes the development and testing of the \verb@load_fits_casa(
   \item \verb@alma_util.py@
   \item \verb@RoundSpottyDisk_Betelgeuse.py@
   \item \verb@load_save_Betelgeuse.py@
-  \item three
+  \item \verb@diff_fits.py@
+  \item \verb@sim_observ.py@
+  \item \verb@diff_ms.py@
   \item four
 \end{enumerate}
 
@@ -48,14 +50,40 @@ In SMILI2 the class \verb@imdata@ provides two methods, \verb@imdata.load_fits_c
 
 \section{Testing the FITS Image Datacubes Identity}
 
-In order to prove that SMILI2 saves FITS files in the true CASA format we first tested the identity of the datacubes in FITS files created by CASA, \verb@RoundSpottyDisk_alma.fits@, and created by SMILI2, \verb@RoundSpottyDisk_smili.fits@. The script \verb@diff_fits.py@ reads the data from both files into memory and compares them, printing if they are identical or not. It can be run as \\ 
+In order to prove that SMILI2 saves FITS files in the true CASA format we first tested the identity of the datacubes in FITS files created by CASA, \verb@RoundSpottyDisk_alma.fits@, and created by SMILI2, \verb@RoundSpottyDisk_smili.fits@. The script \verb@diff_fits.py@ reads the data from both FITS files into memory and compares them, printing if they are identical or not. It can be run as \\
+\\
 \verb@%run diff_fits.py@ \\
-After a few debugging iterations, SMILI2 saves the data in the saved FITS file totally identical to that of the input CASA-generated FITS file.
+\\
+After a few debugging iterations, SMILI2 has proved to save the data in the FITS file totally identical to that of the input CASA-generated FITS file.
 
 
 \section{Simulated Observation of Both FITS Images}
 
+Observing the two FITS images, the original one and its copy saved by SMILI2, must result in two strictly identical measurement sets with the visibility data. CASA provides a task to simulate an observation of a celestial image, \verb@simobserve()@. The script \verb@sim_observ.py@ uses the task to to generate a simulated ALMA measurement set with 2-hour continuous integrations. It also generates one more noisy data set. The noise assumes 10 GHz bandwidth and dual polarization. 
+
+The script \verb@sim_observ.py@ can be used on the two FITS images being compared, \\ \verb@RoundSpottyDisk_alma.fits@ and \verb@RoundSpottyDisk_smili.fits@. \\
+For this it should be run in CASA twice with the command \\
+\\
+\verb@execfile('sim_observ.py')@ \\
+\\
+Before each run, the string variables projname and projdir should be set. The former will be a part of the output filenames, while the latter will be the directory to save the output files. In our experiments the following names have been used: \\
+\verb@projdir = 'alma_orig'; projname = 'alma'@ to observe \verb@RoundSpottyDisk_alma.fits@ \\
+and \\
+\verb@projdir = 'smili_orig'; projname = 'smili' @  to observe \verb@RoundSpottyDisk_smili.fits@. \\
+
+To keep the originals \verb@alma_orig@ and \verb@smili_orig@ safe, they were copied into the directories \verb@alma@ and \verb@smili@.
+
+
 \section{Testing the CASA Measurement Sets' Visibility Data Identity}
+
+Comparison of the resulting measurement sets in the two directories, \verb@alma_orig@ and \verb@smili_orig@, was made with the script \verb@diff_ms.py@: \\
+\\
+\verb@execfile('diff_ms.py')@ \\
+
+
+
+
+
 \section{Testing the Calibration Tables Identity}
 
 
