@@ -37,7 +37,8 @@ ant1 = np.zeros(ncal, dtype=int)
 ant2 = np.zeros(ncal, dtype=int)
 dat1 = np.zeros(ncal, dtype=np.complex64)
 dat2 = np.zeros(ncal, dtype=np.complex64)
-ixant = np.zeros(ncal, dtype=int)        # Antenna indices into 
+
+#ixant = np.zeros(ncal, dtype=int)        # Antenna indices into 
 
 for ix in range(ncal):
     ant1[ix] = cal1[ix]['ANTENNA1']
